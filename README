@@ -1,4 +1,7 @@
-This module require previous initialization of the singleton component XControls defined in XControls.qml
+X Material Controls
 
-How initialize?
+This module require previous initialization of the singleton component XMaterialControls defined in XMaterialControls.qml
+
+
+1. How initialize?
     qmlRegisterSingletonType(QUrl(QLatin1String("qrc:/qml/XMaterialControls.qml")), "XApps.XMaterialControls", 1, 0, "XMaterialControls");
