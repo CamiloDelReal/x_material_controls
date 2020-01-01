@@ -12,8 +12,8 @@
         <file>qml/XDisplayLabel2.qml</file>
         <file>qml/XDisplayLabel3.qml</file>
         <file>qml/XDisplayLabel4.qml</file>
-        <file>img/unknow_picture_dark.svg</file>
-        <file>img/unknow_picture_light.svg</file>
+        <file>img/unknow-picture-dark.svg</file>
+        <file>img/unknow-picture-light.svg</file>
         <file>qml/XMaterialControls.qml</file>
         <file>qml/XCheckDelegate.qml</file>
         <file>qml/XItemGroup.qml</file>
@@ -75,5 +75,10 @@
         <file>qml/XViewNavController.qml</file>
         <file>qml/XParallaxPage.qml</file>
         <file>qml/XImageView.qml</file>
+        <file>qml/XChip.qml</file>
+        <file>img/default-close.svg</file>
+        <file>img/default-dots-vertical.svg</file>
+        <file>img/default-menu.svg</file>
+        <file>img/default-check.svg</file>
     </qresource>
 </RCC>

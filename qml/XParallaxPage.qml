@@ -204,6 +204,7 @@ XPage {
                 id: overflowBtnCtrl
                 visible: menuActions.length > Math.max(maxVisibleMenuActions, 1)
                 onClicked: overflowMenuCtrl.open()
+                icon.source: "qrc:/img/default-dots-vertical.svg"
                 ToolTip.text: overflowTooltip
                 ToolTip.visible: ToolTip.text != "" && down
                 ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval

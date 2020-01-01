@@ -37,6 +37,7 @@ DISTFILES += \
     $$PWD/qml/XCard.qml \
     $$PWD/qml/XCarousel.qml \
     $$PWD/qml/XCheckDelegate.qml \
+    $$PWD/qml/XChip.qml \
     $$PWD/qml/XDelegate.qml \
     $$PWD/qml/XDialog.qml \
     $$PWD/qml/XDisplayLabel1.qml \
@@ -99,8 +100,12 @@ DISTFILES +=
 
 #************  Img Files  *************************************************************************
 DISTFILES += \
-    $$PWD/img/unknow_picture_dark.svg \
-    $$PWD/img/unknow_picture_light.svg
+    $$PWD/img/default-check.svg \
+    $$PWD/img/default-close.svg \
+    $$PWD/img/default-dots-vertical.svg \
+    $$PWD/img/default-menu.svg \
+    $$PWD/img/unknow-picture-dark.svg \
+    $$PWD/img/unknow-picture-light.svg
 
 
 #************  JS Files  **************************************************************************

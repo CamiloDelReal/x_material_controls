@@ -17,7 +17,7 @@ Pane {
         sourceSize.width: 192
         sourceSize.height: 192
         source: splashPaneCtrl.Material.theme === Material.Dark
-                ? "qrc:/img/unknow_picture_dark.svg"
-                : "qrc:/img/unknow_picture_light.svg"
+                ? "qrc:/img/unknow-picture-dark.svg"
+                : "qrc:/img/unknow-picture-light.svg"
     }
 }
