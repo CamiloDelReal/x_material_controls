@@ -31,7 +31,7 @@ Pane {
     property list<XAction> menuActions
     property int maxVisibleMenuActions: 2
 
-    property url overflowIcon
+    property alias overflowIcon: overflowBtnCtrl.icon.source
     property string overflowTooltip: qsTr("More actions")
 
     RowLayout {
@@ -103,7 +103,7 @@ Pane {
         ToolButton {
             id: overflowBtnCtrl
             visible: menuActions.length > Math.max(maxVisibleMenuActions, 1)
-            icon.source: overflowIcon
+            icon.source: "qrc:/img/default-dots-vertical.svg"
             onClicked: overflowMenuCtrl.open()
             ToolTip.text: overflowTooltip
             ToolTip.visible: ToolTip.text != "" && down

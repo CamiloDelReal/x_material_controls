@@ -37,22 +37,22 @@ Page {
     property var presentationModel: [
         {
             "title": qsTr("First Slide"),
-            "image": "qrc:/img/unknow_picture_light.svg",
+            "image": "qrc:/img/unknow-picture-light.svg",
             "description": qsTr("Description description description description description")
         },
         {
             "title": qsTr("Second Slide"),
-            "image": "qrc:/img/unknow_picture_light.svg",
+            "image": "qrc:/img/unknow-picture-light.svg",
             "description": qsTr("Description description description description description")
         },
         {
             "title": qsTr("Third Slide"),
-            "image": "qrc:/img/unknow_picture_light.svg",
+            "image": "qrc:/img/unknow-picture-light.svg",
             "description": qsTr("Description description description description description")
         },
         {
             "title": qsTr("Fourth Slide"),
-            "image": "qrc:/img/unknow_picture_light.svg",
+            "image": "qrc:/img/unknow-picture-light.svg",
             "description": qsTr("Description description description description description")
         }
     ]
