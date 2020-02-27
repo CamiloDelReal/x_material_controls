@@ -1,4 +1,4 @@
-import QtQuick 2.12
+import QtQuick 2.14
 
 Item {
     id: imageView
@@ -15,15 +15,25 @@ Item {
         PropertyAnimation {
             target: flickArea
             property: "contentWidth"
-            from: flickArea.contentWidth
             to: imageView.width
             duration: 200
         }
         PropertyAnimation {
             target: flickArea
             property: "contentHeight"
-            from: flickArea.contentHeight
             to: imageView.height
+            duration: 200
+        }
+        PropertyAnimation {
+            target: flickArea
+            properties: "contentX, contentY"
+            to: 0
+            duration: 200
+        }
+        PropertyAnimation {
+            target: flickArea
+            properties: "topMargin, rightMargin, bottomMargin, leftMargin"
+            to: 0
             duration: 200
         }
     }
@@ -34,7 +44,7 @@ Item {
         contentWidth: imageView.width
         contentHeight: imageView.height
         leftMargin: rightMargin
-        boundsBehavior: Flickable.StopAtBounds
+//        boundsBehavior: Flickable.StopAtBounds
 
         PinchArea {
             anchors.fill: parent
@@ -112,13 +122,7 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         onDoubleClicked: {
-                            flickArea.contentWidth = imageView.width
-                            flickArea.contentHeight = imageView.height
-                            flickArea.leftMargin = 0
-                            flickArea.rightMargin = 0
-                            flickArea.topMargin = 0
-                            flickArea.bottomMargin = 0
-                            //imageView.resetAnimation.running = true
+                            imageView.resetAnimation.running = true
                         }
                         onClicked: imageView.clicked()
                     }
