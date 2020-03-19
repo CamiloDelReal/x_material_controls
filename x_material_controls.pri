@@ -75,8 +75,10 @@ DISTFILES += \
     $$PWD/qml/XScrollView.qml \
     $$PWD/qml/XSettingsPane.qml \
     $$PWD/qml/XSideBarHeader.qml \
+    $$PWD/qml/XSideBar.qml \
     $$PWD/qml/XSideBarNav.qml \
     $$PWD/qml/XSplashPane.qml \
+    $$PWD/qml/XStatusedPage.qml \
     $$PWD/qml/XSubheadingLabel.qml \
     $$PWD/qml/XSwipeDelegate.qml \
     $$PWD/qml/XSwipeView.qml \
