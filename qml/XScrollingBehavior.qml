@@ -1,5 +1,5 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 
 Item {
     id: behaviorController
@@ -188,7 +188,7 @@ Item {
             function disconnectFlickable() {
                 if (previousFlickable) {
                     previousY = 0
-                    previousFlickable.contentItem.yChanged.disconnect(scrollContents)
+                    previousFlickable.contentItem.yChanged.disconnect(yChanged)
                     previousFlickable.interactiveChanged.disconnect(interactiveChanged)
                     previousFlickable = null
                 }
@@ -197,7 +197,7 @@ Item {
             function connectFlickable() {
                 if (flickable) {
                     previousY = -(flickable.contentItem.y)
-                    flickable.contentItem.yChanged.connect(scrollContents)
+                    flickable.contentItem.yChanged.connect(yChanged)
                     flickable.interactiveChanged.connect(interactiveChanged)
                     previousFlickable = flickable
                 }
@@ -211,7 +211,7 @@ Item {
                 }
             }
 
-            function scrollContents() {
+            function yChanged() {
                 if ((!flickable.atYBeginning && !flickable.atYEnd)) {
                     var deltaY = -(flickable.contentItem.y) - previousY
 

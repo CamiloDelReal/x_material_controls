@@ -1,6 +1,6 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Controls.Material 2.12
+import QtQuick 2.14
+import QtQuick.Controls 2.14
+import QtQuick.Controls.Material 2.14
 
 XPage {
     id: pageCtrl
@@ -24,6 +24,7 @@ XPage {
 
     header: XToolBar {
         id: statusbarCtrl
+        visible: pageCtrl.statusBarHeight > 0
         height: pageCtrl.statusBarHeight
         Material.background: pageCtrl.statusbarColor
         Material.elevation: pageCtrl.statusbarElevation

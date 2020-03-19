@@ -11,30 +11,12 @@ XPage {
     property int statusBarHeight: 0
     property int statusbarElevation: 4
 
-    property alias buttonbar: buttonbarCtrl
-
-    property alias contentView: contentViewCtrl
-    default property alias contentViewData: contentViewCtrl.contentData
-
     header: XToolBar {
         id: statusbarCtrl
         visible: pageCtrl.statusBarHeight > 0
         height: pageCtrl.statusBarHeight
         Material.background: pageCtrl.statusbarColor
         Material.elevation: pageCtrl.statusbarElevation
-    }
-
-    XPane {
-        id: contentViewCtrl
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        anchors.top: parent.top
-        padding: 0
-    }
-
-    footer: XButtonBarNav {
-        id: buttonbarCtrl
     }
 
     background: Rectangle {

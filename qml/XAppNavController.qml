@@ -1,5 +1,5 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 
 import "qrc:/js/Queue.js" as Queue
 
@@ -7,6 +7,8 @@ StackView {
     id: navControllerCtrl
 
     property var viewToDestroy
+
+    property bool isInitializing: false
 
     Component.onCompleted: {
         viewToDestroy = new Queue.Queue()
@@ -16,6 +18,10 @@ StackView {
 
     property alias splashViewSource: appSplashLoader.source
     property alias splashViewSourceComponent: appSplashLoader.sourceComponent
+
+    function reinitialize() {
+        startupTimer.start()
+    }
 
     Loader {
         id: appSplashLoader
@@ -140,12 +146,16 @@ StackView {
         interval: 100
         repeat: false
         onTriggered: {
+            isInitializing = true
+
             //Prepare navigation
             if(navControllerCtrl.viewNavigationModel != undefined)
                 viewLoaderGenerator.model = navControllerCtrl.viewNavigationModel
 
             // User initialization
             navControllerCtrl.initialization()
+
+            isInitializing = false
         }
     }
 

@@ -1,8 +1,9 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Controls.Material 2.12
-import QtQuick.Controls.Material.impl 2.12
-import QtQuick.Layouts 1.12
+import QtQuick 2.14
+import QtQuick.Controls 2.14
+import QtQuick.Controls.impl 2.14
+import QtQuick.Controls.Material 2.14
+import QtQuick.Controls.Material.impl 2.14
+import QtQuick.Layouts 1.14
 
 Pane {
     id: groupCtrl
@@ -16,13 +17,17 @@ Pane {
     property alias title: headerCtrl.text
     property bool isExpanded: true
 
+    property string expandedIcon: "qrc:/img/default-minus.svg"
+    property string collapsedIcon: "qrc:/img/default-plus.svg"
+    property int expandedIconSize: 16
+
     states: [
         State {
             name: "itemExpanded"
             when: !groupCtrl.isExpanded
-            //PropertyChanges { target: plusMinusIcon; iconName: "expand_more" }
-            PropertyChanges { target: groupCtrl; height: header.height }
+            PropertyChanges { target: groupCtrl; height: headerCtrl.height }
             PropertyChanges { target: contentCtrl; height: 0 }
+            PropertyChanges { target: expandedIconCtrl; icon.source: collapsedIcon }
         }
     ]
 
@@ -66,20 +71,19 @@ Pane {
                 text: headerCtrl.text
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
-                anchors.verticalCenter: parent.verticalCenter
                 Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
                 color: headerCtrl.Material.secondaryTextColor
             }
 
-//            XMaterialIcon {
-//                id: plusMinusIcon
-//                iconSize: 20
-//                iconColor: header.Material.secondaryTextColor
-//                iconName: "expand_less"
-//                anchors.verticalCenter: parent.verticalCenter
-//                anchors.right: parent.right
-//                anchors.rightMargin: 3
-//            }
+            IconLabel {
+                id: expandedIconCtrl
+                Layout.alignment: Qt.AlignVCenter
+                icon.source: expandedIcon
+                icon.width: expandedIconSize
+                display: IconLabel.IconOnly
+                icon.color: headerCtrl.Material.secondaryTextColor
+            }
         }
 
         XListSeparator { childMode: true }

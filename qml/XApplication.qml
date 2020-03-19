@@ -1,11 +1,13 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Controls.Material 2.12
+import QtQuick 2.14
+import QtQuick.Controls 2.14
+import QtQuick.Controls.Material 2.14
 
 XApplicationWindow {
     id: appWindowCtrl
 
     property bool isPortrait: height > width
+
+    property alias isInitializing: appNavControllerCtrl.isInitializing
 
 
     /* Global SideBar ********************************************************/
@@ -29,6 +31,10 @@ XApplicationWindow {
 
     function initialization() {
         console.log("XApplication > XAppNavController > initialization()")
+    }
+
+    function reinitialize() {
+        appNavControllerCtrl.reinitialize()
     }
 
     signal appNavControllerCreated

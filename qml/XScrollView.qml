@@ -1,10 +1,12 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Controls.Material 2.12
+import QtQuick 2.14
+import QtQuick.Controls 2.14
+import QtQuick.Controls.Material 2.14
 
 Flickable {
     id: flickableCtrl
     contentHeight: contentViewCtrl.height + topPadding + bottomPadding
+
+    property int modelIndex: -1
 
     property int leftPadding: 0
     property int topPadding: 0
