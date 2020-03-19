@@ -6,6 +6,8 @@ Flickable {
     id: flickableCtrl
     contentHeight: contentViewCtrl.height + topPadding + bottomPadding
 
+    property int modelIndex: -1
+
     property int leftPadding: 0
     property int topPadding: 0
     property int rightPadding: 0
