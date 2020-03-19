@@ -1,5 +1,6 @@
 #include "mobilemanager.hpp"
 
+
 MobileManager::MobileManager(QObject *parent)
     : QObject(parent)
 {
