@@ -21,6 +21,7 @@ XPage {
 
     header: XToolBar {
         id: statusbarCtrl
+        visible: pageCtrl.statusBarHeight > 0
         height: pageCtrl.statusBarHeight
         Material.background: pageCtrl.statusbarColor
         Material.elevation: pageCtrl.statusbarElevation
