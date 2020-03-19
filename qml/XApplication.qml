@@ -7,6 +7,8 @@ XApplicationWindow {
 
     property bool isPortrait: height > width
 
+    property alias isInitializing: appNavControllerCtrl.isInitializing
+
 
     /* Global SideBar ********************************************************/
 
@@ -29,6 +31,10 @@ XApplicationWindow {
 
     function initialization() {
         console.log("XApplication > XAppNavController > initialization()")
+    }
+
+    function reinitialize() {
+        appNavControllerCtrl.reinitialize()
     }
 
     signal appNavControllerCreated

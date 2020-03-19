@@ -8,6 +8,8 @@ StackView {
 
     property var viewToDestroy
 
+    property bool isInitializing: false
+
     Component.onCompleted: {
         viewToDestroy = new Queue.Queue()
     }
@@ -16,6 +18,10 @@ StackView {
 
     property alias splashViewSource: appSplashLoader.source
     property alias splashViewSourceComponent: appSplashLoader.sourceComponent
+
+    function reinitialize() {
+        startupTimer.start()
+    }
 
     Loader {
         id: appSplashLoader
@@ -140,12 +146,16 @@ StackView {
         interval: 100
         repeat: false
         onTriggered: {
+            isInitializing = true
+
             //Prepare navigation
             if(navControllerCtrl.viewNavigationModel != undefined)
                 viewLoaderGenerator.model = navControllerCtrl.viewNavigationModel
 
             // User initialization
             navControllerCtrl.initialization()
+
+            isInitializing = false
         }
     }
 
