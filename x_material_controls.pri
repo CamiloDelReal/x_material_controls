@@ -1,3 +1,7 @@
+#************  Qt Configurations  *****************************************************************
+QT += core5compat
+
+
 #************  QML Configurations  ****************************************************************
 QML_IMPORT_PATH += $$PWD/qml
 
@@ -46,6 +50,8 @@ DISTFILES += \
     $$PWD/qml/XDisplayLabel4.qml \
     $$PWD/qml/XFormTextArea.qml \
     $$PWD/qml/XFormTextField.qml \
+    $$PWD/qml/XFormTextFieldFilled.qml \
+    $$PWD/qml/XFormTextFieldOutlined.qml \
     $$PWD/qml/XHeadlineLabel.qml \
     $$PWD/qml/XImageView.qml \
     $$PWD/qml/XItemDelegate.qml \
@@ -97,7 +103,7 @@ DISTFILES += \
 
 
 #************  Font Files  ************************************************************************
-DISTFILES += 
+RESOURCES +=
 
 
 #************  Img Files  *************************************************************************

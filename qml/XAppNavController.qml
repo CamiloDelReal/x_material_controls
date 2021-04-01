@@ -1,5 +1,5 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
+import QtQuick
+import QtQuick.Controls
 
 import "qrc:/js/Queue.js" as Queue
 
@@ -46,6 +46,7 @@ StackView {
             active: false
             visible: false
             source: modelData.view
+            property var sharedData: undefined
             onLoaded: {
                 item.modelIndex = index
                 navControllerCtrl.gotoView(index)
@@ -57,7 +58,7 @@ StackView {
         console.log("XAppNavController > initialization()")
     }
 
-    function gotoView(viewIndex) {
+    function gotoView(viewIndex, properties) {
         if(navControllerCtrl.currentItem.modelIndex !== viewIndex) {
             if(viewLoaderGenerator.itemAt(viewIndex).status === Loader.Ready) {
                 if(viewLoaderGenerator.model[viewIndex].stacked) {
@@ -66,16 +67,23 @@ StackView {
                     navControllerCtrl.push(viewLoaderGenerator.itemAt(viewIndex).item)
                 }
                 else {
-                    var currentItemIndex = navControllerCtrl.currentItem.modelIndex
-                    prepareCurrentForReplaceExit(navControllerCtrl.currentItem)
+                    var currentItemIndex = undefined
+                    if(navControllerCtrl.currentItem) {
+                        currentItemIndex = navControllerCtrl.currentItem.modelIndex
+                        prepareCurrentForReplaceExit(navControllerCtrl.currentItem)
+                    }
                     prepareNextForReplaceEnter(viewLoaderGenerator.itemAt(viewIndex).item)
-                    navControllerCtrl.replace(viewLoaderGenerator.itemAt(viewIndex).item)
+                    navControllerCtrl.replace(viewLoaderGenerator.itemAt(viewIndex).item,
+                                              viewLoaderGenerator.itemAt(viewIndex).sharedData)
                     //Send to clean
-                    navControllerCtrl.viewToDestroy.enqueue(currentItemIndex)
-                    cleanPendingViewsTimer.start()
+                    if(currentItemIndex !== undefined) {
+                        navControllerCtrl.viewToDestroy.enqueue(currentItemIndex)
+                        cleanPendingViewsTimer.start()
+                    }
                 }
             }
             else {
+                viewLoaderGenerator.itemAt(viewIndex).sharedData = properties
                 viewLoaderGenerator.itemAt(viewIndex).active = true
             }
         }

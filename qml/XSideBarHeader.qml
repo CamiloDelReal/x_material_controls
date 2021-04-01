@@ -1,22 +1,22 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Controls.impl 2.14
-import QtQuick.Controls.Material 2.14
-import QtQuick.Controls.Material.impl 2.14
-import QtQuick.Layouts 1.14
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.impl
+import QtQuick.Controls.Material
+import QtQuick.Controls.Material.impl
+import QtQuick.Layouts
 
 Pane {
     id: headerCtrl
 
-    property int statusBarHeight: 0
+    property int statusbarHeight: 0
     property int baseHeight: 132
 
-    topPadding: headerCtrl.statusBarHeight + 10
+    topPadding: headerCtrl.statusbarHeight + 10
     leftPadding: 10
     bottomPadding: Material.elevation * 2
     rightPadding: 10
     width: parent.width
-    height: headerCtrl.statusBarHeight + headerCtrl.baseHeight + Material.elevation * 2
+    height: headerCtrl.statusbarHeight + headerCtrl.baseHeight + Material.elevation * 2
     Material.elevation: 4
     clip: true
     bottomInset: Material.elevation * 2

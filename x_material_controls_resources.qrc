@@ -84,5 +84,7 @@
         <file>img/default-minus.svg</file>
         <file>img/default-plus.svg</file>
         <file>qml/XStatusedPage.qml</file>
+        <file>qml/XFormTextFieldOutlined.qml</file>
+        <file>qml/XFormTextFieldFilled.qml</file>
     </qresource>
 </RCC>

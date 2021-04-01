@@ -114,19 +114,19 @@ void MobileManager::doAndroidCheats()
             QAndroidJniObject activity = QtAndroid::androidActivity();
             QAndroidJniObject resources = activity.callObjectMethod("getResources", "()Landroid/content/res/Resources;");
             QAndroidJniObject window = activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
-            jint statusBarHeight = 0;
-            quint32 statusBarHeightForQt = 0;
-            jint statusBarHeightId = resources.callMethod<jint>("getIdentifier",
+            jint statusbarHeight = 0;
+            quint32 statusbarHeightForQt = 0;
+            jint statusbarHeightId = resources.callMethod<jint>("getIdentifier",
                                                                 "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I",
                                                                 QAndroidJniObject::fromString("status_bar_height").object<jstring>(),
                                                                 QAndroidJniObject::fromString("dimen").object<jstring>(),
                                                                 QAndroidJniObject::fromString("android").object<jstring>());
-            if(statusBarHeightId > 0) {
-                statusBarHeight = resources.callMethod<jint>("getDimensionPixelSize", "(I)I", statusBarHeightId);
+            if(statusbarHeightId > 0) {
+                statusbarHeight = resources.callMethod<jint>("getDimensionPixelSize", "(I)I", statusbarHeightId);
                 jint DENSITY_DEFAULT = QAndroidJniObject::getStaticField<jint>("android/util/DisplayMetrics", "DENSITY_DEFAULT");
                 QAndroidJniObject displayMetrics = resources.callObjectMethod("getDisplayMetrics", "()Landroid/util/DisplayMetrics;");
                 jint densityDpi = displayMetrics.getField<jint>("densityDpi");
-                statusBarHeightForQt = static_cast<quint32>(statusBarHeight / (static_cast<float>(densityDpi) / DENSITY_DEFAULT));
+                statusbarHeightForQt = static_cast<quint32>(statusbarHeight / (static_cast<float>(densityDpi) / DENSITY_DEFAULT));
             }
 
             if(QtAndroid::androidSdkVersion() >= 19 && QtAndroid::androidSdkVersion() < 21)
@@ -144,7 +144,7 @@ void MobileManager::doAndroidCheats()
                                                                                        "WRAP_CONTENT");
                 QAndroidJniObject layoutParam("android/widget/FrameLayout$LayoutParams",
                                               "(II)V", MATCH_PARENT, WRAP_CONTENT);
-                layoutParam.setField<jint>("height", statusBarHeight);
+                layoutParam.setField<jint>("height", statusbarHeight);
                 view.callMethod<void>("setLayoutParams", "(Landroid/view/ViewGroup$LayoutParams;)V", layoutParam.object<jobject>());
                 view.callMethod<void>("setBackgroundColor", "(I)V", currentManager.systemStatusBarColor().rgba());
                 QAndroidJniObject decorView = window.callObjectMethod("getDecorView", "()Landroid/view/View;");
@@ -169,7 +169,7 @@ void MobileManager::doAndroidCheats()
             }
 
             currentManager.setSystemStatusBarAvailable(true);
-            currentManager.setSystemStatusBarSize(static_cast<quint32>(statusBarHeightForQt));
+            currentManager.setSystemStatusBarSize(static_cast<quint32>(statusbarHeightForQt));
 
             currentManager.setAndroidCheatsReady(true);
         });

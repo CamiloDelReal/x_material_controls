@@ -1,5 +1,5 @@
-import QtQuick 2.14
-import QtGraphicalEffects 1.14
+import QtQuick
+//import QtGraphicalEffects 1.14
 
 Image {
     id: imageCtrl

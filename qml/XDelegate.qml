@@ -1,7 +1,7 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Controls.Material 2.14
-import QtQuick.Controls.Material.impl 2.14
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.Material
+import QtQuick.Controls.Material.impl
 
 ItemDelegate {
     id: itemCtrl
@@ -27,6 +27,8 @@ ItemDelegate {
             anchors.fill: parent
             clipRadius: itemCtrl.radius
             clip: true
+            width: parent.height / 2
+            height: parent.height / 2
             pressed: itemCtrl.pressed
             anchor: itemCtrl
             active: itemCtrl.down || itemCtrl.visualFocus || itemCtrl.hovered

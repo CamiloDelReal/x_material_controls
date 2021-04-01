@@ -1,5 +1,5 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
+import QtQuick
+import QtQuick.Controls
 
 Item {
     id: behaviorController
@@ -102,7 +102,7 @@ Item {
         Item {
             Connections {
                 target: topbar
-                onYChanged: {
+                function onYChanged() {
                     var value = (order === XScrollingBehavior.ScrollOrder.BottomToTop
                                  ? Math.max(topbar.y + topBarsHeightSum[index] - starterY, 0)
                                  : topBarsHeightSum[index])

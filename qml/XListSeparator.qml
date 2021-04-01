@@ -1,6 +1,6 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Controls.Material 2.14
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.Material
 
 Item {
     id: separatorCtrl
@@ -16,10 +16,10 @@ Item {
     anchors.left: childMode ? parent.left : undefined
     anchors.right: childMode ? parent.right : undefined
     anchors.top: childMode
-                 ? (position == Qt.AlignTop ? parent.top : undefined)
+                 ? (position === Qt.AlignTop ? parent.top : undefined)
                  : undefined
     anchors.bottom: childMode
-                    ? (position == Qt.AlignBottom ? parent.bottom : undefined)
+                    ? (position === Qt.AlignBottom ? parent.bottom : undefined)
                     : undefined
 
     Rectangle {

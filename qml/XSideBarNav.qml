@@ -1,13 +1,13 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Controls.Material 2.14
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.Material
 
 Drawer {
     id: drawerCtrl
     width: Math.min(parent.width, parent.height) * 0.75
     height: parent.height
     edge: Qt.LeftEdge
-    parent: ApplicationWindow.overlay
+    parent: Overlay.overlay
 
     Overlay.modal: Rectangle {
         color: "#99303030"
@@ -61,7 +61,7 @@ Drawer {
         currentIndex: drawerCtrl.currentIndex  // Don't be reading the first value at init
         model: linkActions ? linkActions : 0
         delegate: XItemDelegate {
-            width: parent.width
+            width: linksListCtrl.width
             autoExclusive: modelData.checkable
             action: modelData
             highlighted: checked

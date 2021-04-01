@@ -1,6 +1,6 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Controls.Material 2.14
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.Material
 
 XPage {
     id: pageCtrl
@@ -8,13 +8,13 @@ XPage {
 
     property alias statusbar: statusbarCtrl
     property color statusbarColor: pageCtrl.Material.primary
-    property int statusBarHeight: 0
+    property int statusbarHeight: 0
     property int statusbarElevation: 4
 
     header: XToolBar {
         id: statusbarCtrl
-        visible: pageCtrl.statusBarHeight > 0
-        height: pageCtrl.statusBarHeight
+        visible: pageCtrl.statusbarHeight > 0
+        height: pageCtrl.statusbarHeight
         Material.background: pageCtrl.statusbarColor
         Material.elevation: pageCtrl.statusbarElevation
     }
@@ -26,7 +26,7 @@ XPage {
         // when change the page using fade in/out transition
         Rectangle {
             width: parent.width
-            height: pageCtrl.statusBarHeight
+            height: pageCtrl.statusbarHeight
             color: pageCtrl.statusbarColor
         }
     }

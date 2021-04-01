@@ -1,5 +1,5 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
+import QtQuick
+import QtQuick.Controls
 
 import "qrc:/js/Queue.js" as Queue
 
@@ -49,7 +49,7 @@ StackView {
                     navControllerCtrl.replace(viewLoaderGenerator.itemAt(viewIndex).item,
                                               viewLoaderGenerator.itemAt(viewIndex).sharedData)
                     //Send to clean
-                    if(currentItemIndex != undefined) {
+                    if(currentItemIndex !== undefined) {
                         navControllerCtrl.viewToDestroy.enqueue(currentItemIndex)
                         cleanPendingViewsTimer.start()
                     }

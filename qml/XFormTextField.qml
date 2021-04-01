@@ -1,9 +1,9 @@
-import QtQuick 2.14
-import QtQuick.Templates 2.14 as T
-import QtQuick.Controls 2.14
-import QtQuick.Controls.impl 2.14
-import QtQuick.Controls.Material 2.14
-import QtQuick.Controls.Material.impl 2.14
+import QtQuick
+import QtQuick.Templates as T
+import QtQuick.Controls
+import QtQuick.Controls.impl
+import QtQuick.Controls.Material
+import QtQuick.Controls.Material.impl
 
 T.TextField {
     id: textfieldCtrl
@@ -34,7 +34,7 @@ T.TextField {
         y: textfieldCtrl.activeFocus || textfieldCtrl.text.length ? ((textfieldCtrl.topPadding - placeholderCtrl.height) / 2) : textfieldCtrl.topPadding
         Behavior on x { NumberAnimation { duration: 100 } }
         Behavior on y { NumberAnimation { duration: 100 } }
-        width: textfieldCtrl.width - (textfieldCtrl.leftPadding + textfieldCtrl.rightPadding)
+        width: placeholderCtrl.implicitWidth
         text: textfieldCtrl.placeholderText
         font.family: textfieldCtrl.font.family
         font.pixelSize: textfieldCtrl.activeFocus || textfieldCtrl.text.length ? 12 : textfieldCtrl.font.pixelSize

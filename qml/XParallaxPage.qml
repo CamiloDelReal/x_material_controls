@@ -1,14 +1,14 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Controls.impl 2.14
-import QtQuick.Controls.Material 2.14
-import QtQuick.Layouts 1.14
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.impl
+import QtQuick.Controls.Material
+import QtQuick.Layouts
 
 XPage {
     id: page
     padding: 0
 
-    property int statusBarHeight: 0
+    property int statusbarHeight: 0
 
     property alias toolbar: toolbarCtrl
 
@@ -43,7 +43,7 @@ XPage {
     property int starterY: 0
     property int minimunHeight: 48
     property int maximunHeight: 220
-    property int hiddenHeight: maximunHeight - minimunHeight - statusBarHeight
+    property int hiddenHeight: maximunHeight - minimunHeight - statusbarHeight
 
     property Flickable flickable: null
     onFlickableChanged: {
@@ -115,7 +115,7 @@ XPage {
                 target: parallaxContainer
                 property: "height"
                 from: maximunHeight
-                to: minimunHeight + statusBarHeight
+                to: minimunHeight + statusbarHeight
             }
             NumberAnimation {
                 target: parallaxContainer
