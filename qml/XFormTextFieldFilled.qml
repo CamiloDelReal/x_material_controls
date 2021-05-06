@@ -30,9 +30,11 @@ T.TextField {
     property int backgroundBorder: 2
     property color backgroundBorderColor: textfieldCtrl.activeFocus
                                           ? textfieldCtrl.Material.accentColor
-                                          : (textfieldCtrl.hovered
-                                             ? textfieldCtrl.Material.primaryTextColor
-                                             : textfieldCtrl.Material.hintTextColor)
+                                          : (textfieldCtrl.enabled
+                                             ? (textfieldCtrl.hovered
+                                                ? textfieldCtrl.Material.primaryTextColor
+                                                : textfieldCtrl.Material.hintTextColor)
+                                             : Material.hintTextColor)
     property int backgroundRadius: 4
 
     property alias leftItem: leftItemLayoutCtrl.children
@@ -79,9 +81,11 @@ T.TextField {
         Behavior on font.pixelSize { NumberAnimation { duration: 100 } }
         color: textfieldCtrl.activeFocus
                ? textfieldCtrl.Material.accentColor
-               : (textfieldCtrl.hovered && textfieldCtrl.text.length
-                  ? textfieldCtrl.Material.primaryTextColor
-                  : textfieldCtrl.Material.hintTextColor)
+               : (textfieldCtrl.enabled
+                  ?(textfieldCtrl.hovered && textfieldCtrl.text.length
+                    ? textfieldCtrl.Material.primaryTextColor
+                    : textfieldCtrl.Material.hintTextColor)
+                  : Material.hintTextColor)
         verticalAlignment: textfieldCtrl.verticalAlignment
         elide: Text.ElideRight
         visible: textfieldCtrl.placeholderText.length

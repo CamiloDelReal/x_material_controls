@@ -25,10 +25,18 @@ T.TextField {
     selectionColor: Material.accentColor
     selectedTextColor: Material.primaryHighlightedTextColor
     verticalAlignment: TextInput.AlignBottom
-    property alias backgroundOpacity: bgItemCtrl.opacity
-    property alias backgroundColor: bgItemCtrl.color
-    property alias backgroundBorder: bgItemCtrl.border
-    property alias backgroundRadius: bgItemCtrl.radius
+
+    property double backgroundOpacity: 0.6
+    property color backgroundColor: textfieldCtrl.Material.background
+    property int backgroundBorder: 2
+    property color backgroundBorderColor: textfieldCtrl.activeFocus
+                                          ? textfieldCtrl.Material.accentColor
+                                          : (textfieldCtrl.enabled
+                                             ? (textfieldCtrl.hovered
+                                                ? textfieldCtrl.Material.primaryTextColor
+                                                : textfieldCtrl.Material.hintTextColor)
+                                             : Material.hintTextColor)
+    property int backgroundRadius: 4
 
     property alias leftItem: leftItemLayoutCtrl.children
     property int leftItemMargin: 8
@@ -81,9 +89,11 @@ T.TextField {
         Behavior on font.pixelSize { NumberAnimation { duration: 100 } }
         color: textfieldCtrl.activeFocus
                ? textfieldCtrl.Material.accentColor
-               : (textfieldCtrl.hovered && textfieldCtrl.text.length
-                  ? textfieldCtrl.Material.primaryTextColor
-                  : textfieldCtrl.Material.hintTextColor)
+               : (textfieldCtrl.enabled
+                  ?(textfieldCtrl.hovered && textfieldCtrl.text.length
+                    ? textfieldCtrl.Material.primaryTextColor
+                    : textfieldCtrl.Material.hintTextColor)
+                  : Material.hintTextColor)
         verticalAlignment: textfieldCtrl.verticalAlignment
         elide: Text.ElideRight
         visible: textfieldCtrl.placeholderText.length
@@ -94,13 +104,9 @@ T.TextField {
         implicitWidth: 120
         implicitHeight: textfieldCtrl.height
         y: 6
-        color: textfieldCtrl.Material.background
-        border.width: 2
-        border.color: textfieldCtrl.activeFocus
-                      ? textfieldCtrl.Material.accentColor
-                      : (textfieldCtrl.hovered
-                         ? textfieldCtrl.Material.primaryTextColor
-                         : textfieldCtrl.Material.hintTextColor)
-        radius: 4
+        color: backgroundColor
+        border.width: backgroundBorder
+        border.color: backgroundBorderColor
+        radius: backgroundRadius
     }
 }

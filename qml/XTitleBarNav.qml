@@ -64,8 +64,9 @@ Pane {
                 id: subtitleLabelCtrl
                 Layout.fillWidth: true
                 Layout.minimumWidth: contentWidth + leftPadding + rightPadding
-                leftPadding: 15
+                leftPadding: 17
                 rightPadding: 10
+                topPadding: -4
                 visible: text.length > 0
             }
         }
