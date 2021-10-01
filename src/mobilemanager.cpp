@@ -1,5 +1,10 @@
 #include "mobilemanager.hpp"
 
+#if defined (Q_OS_ANDROID)
+#include <QCoreApplication>
+#include <qnativeinterface.h>
+#endif
+
 
 MobileManager::MobileManager(QObject *parent)
     : QObject(parent)
@@ -44,16 +49,16 @@ void MobileManager::setSystemStatusBarColor(const QColor &systemStatusBarColor)
 #if defined (Q_OS_ANDROID)
         // Here we need to check again if is Android or iOs
         MobileManager &currentManager = *this;
-        QtAndroid::runOnAndroidThreadSync([&currentManager](){
-            QAndroidJniObject activity = QtAndroid::androidActivity();
-            if(QtAndroid::androidSdkVersion() >= 19 && QtAndroid::androidSdkVersion() < 21)
+        QNativeInterface::QAndroidApplication::runOnAndroidMainThread([&currentManager](){
+            QJniObject activity = QNativeInterface::QAndroidApplication::context();
+            if(QNativeInterface::QAndroidApplication::sdkVersion() >= 19 && QNativeInterface::QAndroidApplication::sdkVersion() < 21)
             {
-                QAndroidJniObject view = currentManager.statusColorChanger();
+                QJniObject view = currentManager.statusColorChanger();
                 view.callMethod<void>("setBackgroundColor", "(I)V", currentManager.systemStatusBarColor().rgba());
             }
-            else if(QtAndroid::androidSdkVersion() >= 21)
+            else if(QNativeInterface::QAndroidApplication::sdkVersion() >= 21)
             {
-                QAndroidJniObject window = currentManager.statusColorChanger();
+                QJniObject window = currentManager.statusColorChanger();
                 window.callMethod<void>("setStatusBarColor", "(I)V", currentManager.systemStatusBarColor().rgba());
             }
         });
@@ -107,60 +112,60 @@ void MobileManager::setUiReady(const bool &uiReady)
 #if defined (Q_OS_ANDROID)
 void MobileManager::doAndroidCheats()
 {
-    if(QtAndroid::androidSdkVersion() >= 19)
+    if(QNativeInterface::QAndroidApplication::sdkVersion() >= 19)
     {
         MobileManager &currentManager = *this;
-        QtAndroid::runOnAndroidThreadSync([&currentManager]() {
-            QAndroidJniObject activity = QtAndroid::androidActivity();
-            QAndroidJniObject resources = activity.callObjectMethod("getResources", "()Landroid/content/res/Resources;");
-            QAndroidJniObject window = activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
+        QNativeInterface::QAndroidApplication::runOnAndroidMainThread([&currentManager]() {
+            QJniObject activity = QNativeInterface::QAndroidApplication::context();
+            QJniObject resources = activity.callObjectMethod("getResources", "()Landroid/content/res/Resources;");
+            QJniObject window = activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
             jint statusbarHeight = 0;
             quint32 statusbarHeightForQt = 0;
             jint statusbarHeightId = resources.callMethod<jint>("getIdentifier",
                                                                 "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I",
-                                                                QAndroidJniObject::fromString("status_bar_height").object<jstring>(),
-                                                                QAndroidJniObject::fromString("dimen").object<jstring>(),
-                                                                QAndroidJniObject::fromString("android").object<jstring>());
+                                                                QJniObject::fromString("status_bar_height").object<jstring>(),
+                                                                QJniObject::fromString("dimen").object<jstring>(),
+                                                                QJniObject::fromString("android").object<jstring>());
             if(statusbarHeightId > 0) {
                 statusbarHeight = resources.callMethod<jint>("getDimensionPixelSize", "(I)I", statusbarHeightId);
-                jint DENSITY_DEFAULT = QAndroidJniObject::getStaticField<jint>("android/util/DisplayMetrics", "DENSITY_DEFAULT");
-                QAndroidJniObject displayMetrics = resources.callObjectMethod("getDisplayMetrics", "()Landroid/util/DisplayMetrics;");
+                jint DENSITY_DEFAULT = QJniObject::getStaticField<jint>("android/util/DisplayMetrics", "DENSITY_DEFAULT");
+                QJniObject displayMetrics = resources.callObjectMethod("getDisplayMetrics", "()Landroid/util/DisplayMetrics;");
                 jint densityDpi = displayMetrics.getField<jint>("densityDpi");
                 statusbarHeightForQt = static_cast<quint32>(statusbarHeight / (static_cast<float>(densityDpi) / DENSITY_DEFAULT));
             }
 
-            if(QtAndroid::androidSdkVersion() >= 19 && QtAndroid::androidSdkVersion() < 21)
+            if(QNativeInterface::QAndroidApplication::sdkVersion() >= 19 && QNativeInterface::QAndroidApplication::sdkVersion() < 21)
             {
 
-                jint FLAG_TRANSLUCENT_STATUS = QAndroidJniObject::getStaticField<jint>("android/view/WindowManager$LayoutParams",
+                jint FLAG_TRANSLUCENT_STATUS = QJniObject::getStaticField<jint>("android/view/WindowManager$LayoutParams",
                                                                                        "FLAG_TRANSLUCENT_STATUS");
                 window.callMethod<void>("setFlags", "(II)V",
                                         FLAG_TRANSLUCENT_STATUS, FLAG_TRANSLUCENT_STATUS);
 
-                QAndroidJniObject view("android/view/View", "(Landroid/content/Context;)V", activity.object<jobject>());
-                jint MATCH_PARENT = QAndroidJniObject::getStaticField<jint>("android/view/ViewGroup$LayoutParams",
+                QJniObject view("android/view/View", "(Landroid/content/Context;)V", activity.object<jobject>());
+                jint MATCH_PARENT = QJniObject::getStaticField<jint>("android/view/ViewGroup$LayoutParams",
                                                                                        "MATCH_PARENT");
-                jint WRAP_CONTENT = QAndroidJniObject::getStaticField<jint>("android/view/ViewGroup$LayoutParams",
+                jint WRAP_CONTENT = QJniObject::getStaticField<jint>("android/view/ViewGroup$LayoutParams",
                                                                                        "WRAP_CONTENT");
-                QAndroidJniObject layoutParam("android/widget/FrameLayout$LayoutParams",
+                QJniObject layoutParam("android/widget/FrameLayout$LayoutParams",
                                               "(II)V", MATCH_PARENT, WRAP_CONTENT);
                 layoutParam.setField<jint>("height", statusbarHeight);
                 view.callMethod<void>("setLayoutParams", "(Landroid/view/ViewGroup$LayoutParams;)V", layoutParam.object<jobject>());
                 view.callMethod<void>("setBackgroundColor", "(I)V", currentManager.systemStatusBarColor().rgba());
-                QAndroidJniObject decorView = window.callObjectMethod("getDecorView", "()Landroid/view/View;");
+                QJniObject decorView = window.callObjectMethod("getDecorView", "()Landroid/view/View;");
                 decorView.callMethod<void>("addView", "(Landroid/view/View;)V", view.object<jobject>());
                 currentManager.setStatusColorChanger(view);
             }
-            else if(QtAndroid::androidSdkVersion() >= 21)
+            else if(QNativeInterface::QAndroidApplication::sdkVersion() >= 21)
             {
-                jint flags = QAndroidJniObject::getStaticField<jint>("android/view/View", "SYSTEM_UI_FLAG_LAYOUT_STABLE")
-                        | QAndroidJniObject::getStaticField<jint>("android/view/View", "SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN");
-                QAndroidJniObject decorView = window.callObjectMethod("getDecorView", "()Landroid/view/View;");
+                jint flags = QJniObject::getStaticField<jint>("android/view/View", "SYSTEM_UI_FLAG_LAYOUT_STABLE")
+                        | QJniObject::getStaticField<jint>("android/view/View", "SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN");
+                QJniObject decorView = window.callObjectMethod("getDecorView", "()Landroid/view/View;");
                 decorView.callMethod<void>("setSystemUiVisibility", "(I)V", flags);
 
-                jint FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS = QAndroidJniObject::getStaticField<jint>("android/view/WindowManager$LayoutParams",
+                jint FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS = QJniObject::getStaticField<jint>("android/view/WindowManager$LayoutParams",
                                                                                                  "FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS");
-                jint FLAG_TRANSLUCENT_STATUS = QAndroidJniObject::getStaticField<jint>("android/view/WindowManager$LayoutParams",
+                jint FLAG_TRANSLUCENT_STATUS = QJniObject::getStaticField<jint>("android/view/WindowManager$LayoutParams",
                                                                                        "FLAG_TRANSLUCENT_STATUS");
                 window.callMethod<void>("addFlags", "(I)V", FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.callMethod<void>("clearFlags", "(I)V", FLAG_TRANSLUCENT_STATUS);
@@ -196,15 +201,15 @@ void MobileManager::setAndroidCheatsReady(const bool &androidCheatsReady)
 
 void MobileManager::androidCheatsFinish()
 {
-    QtAndroid::hideSplashScreen(250);
+    QNativeInterface::QAndroidApplication::hideSplashScreen(250);
 }
 
-QAndroidJniObject MobileManager::statusColorChanger()
+QJniObject MobileManager::statusColorChanger()
 {
     return m_statusColorChanger;
 }
 
-void MobileManager::setStatusColorChanger(const QAndroidJniObject &statusColorChanger)
+void MobileManager::setStatusColorChanger(const QJniObject &statusColorChanger)
 {
     m_statusColorChanger = statusColorChanger;
 }

@@ -7,7 +7,8 @@
 #include <QColor>
 
 #if defined (Q_OS_ANDROID)
-#include <QtAndroidExtras>
+#include <QJniObject>
+#include <QJniEnvironment>
 #endif
 
 #if defined (Q_OS_ANDROID) || defined (Q_OS_IOS)
@@ -59,8 +60,8 @@ public:
     void doAndroidCheats();
     void setAndroidCheatsReady(const bool &androidCheatsReady);
     void androidCheatsFinish();
-    QAndroidJniObject statusColorChanger();
-    void setStatusColorChanger(const QAndroidJniObject &statusColorChanger);
+    QJniObject statusColorChanger();
+    void setStatusColorChanger(const QJniObject &statusColorChanger);
 #elif defined (Q_OS_IOS)
     void doIosCheats();
     void setIosCheatsReady(const bool &iosCheatsReady);
@@ -74,7 +75,7 @@ private:
     bool m_uiReady;
 #if defined (Q_OS_ANDROID)
     bool m_androidCheatsReady;
-    QAndroidJniObject m_statusColorChanger;
+    QJniObject m_statusColorChanger;
 #elif defined (Q_OS_IOS)
     bool m_iosCheatsReady;
 #endif
