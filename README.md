@@ -105,3 +105,5 @@ Check [Demo](https://github.com/CamiloDelReal/xapps_controls_demo) for examples
   * Missing iOS
   * Requires black drawable as splash with sticky behavior in Android to avoid flickering when app is loading.
     - [main.cpp](https://github.com/CamiloDelReal/xapps_controls_demo/blob/develop/src/app/main.cpp)
+	- [AndroidManifest.xml](https://github.com/CamiloDelReal/xapps_controls_demo/blob/develop/android/AndroidManifest.xml)
+	- [splashscreen.xml](https://github.com/CamiloDelReal/xapps_controls_demo/blob/develop/android/res/drawable/splashscreen.xml)
