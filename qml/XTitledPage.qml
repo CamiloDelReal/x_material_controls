@@ -39,7 +39,7 @@ XPage {
         id: toolbarCtrl
         anchors.left: parent.left
         anchors.right: parent.right
-        height: titlebarCtrl.implicitHeight
+        height: titlebarCtrl.implicitHeight + topMargin + bottomMargin
         y: 0
         z: 100
         topInset: topMargin

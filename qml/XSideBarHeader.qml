@@ -16,7 +16,7 @@ Pane {
     bottomPadding: Material.elevation * 2
     rightPadding: 10
     width: parent.width
-    height: headerCtrl.statusbarHeight + headerCtrl.baseHeight + Material.elevation * 2
+    implicitHeight: headerCtrl.statusbarHeight + headerCtrl.baseHeight + Material.elevation * 2
     Material.elevation: 4
     clip: true
     bottomInset: Material.elevation * 2
