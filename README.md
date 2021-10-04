@@ -100,3 +100,8 @@ Check [Demo](https://github.com/CamiloDelReal/xapps_controls_demo) for examples
   * Splash
   * Side bar
   * Navigation
+- Mobile cheats
+  * Statusbar color and size for Android
+  * Missing iOS
+  * Requires black drawable as splash with sticky behavior in Android to avoid flickering when app is loading.
+    - [main.cpp](https://github.com/CamiloDelReal/xapps_controls_demo/blob/develop/src/app/main.cpp)
