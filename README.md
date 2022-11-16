@@ -2,6 +2,9 @@
 Library extending quickcontrols2 to enhance application development using Material style.<br/>
 Check [Demo](https://github.com/CamiloDelReal/xapps_controls_demo) for examples
 
+## This project will not be maintenance anymore
+I am not working for Qt since a while and updates started to become hard after so much changes in Qt 6
+
 ## Components
 - XLabel
   * Display 1 to 4
